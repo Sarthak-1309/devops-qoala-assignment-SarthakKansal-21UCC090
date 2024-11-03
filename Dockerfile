@@ -1,5 +1,11 @@
-FROM nginx:latest
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY ./html /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+FROM python:3.9
+
+WORKDIR /app
+
+COPY app.py /app
+
+RUN pip install flask netifaces
+
+EXPOSE 8000
+
+CMD ["python", "app.py"]
